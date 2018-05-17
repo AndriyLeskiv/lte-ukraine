@@ -1,3 +1,25 @@
-path:hover{
-  fill: red;
+.title {
+  text-align: center;
+  text-transform: uppercase;
+}
+.container {
+  display: flex;
+}
+
+aside {
+  width: 25%;
+}
+
+agm-map {
+  width: 100%;
+  height: calc(100vh - 116px);
+}
+
+footer {
+  background: #dedede;
+  text-align: center;
+  padding: 9px 0;
+  position: fixed;;
+  bottom: 0;
+  width: 100%;
 }
