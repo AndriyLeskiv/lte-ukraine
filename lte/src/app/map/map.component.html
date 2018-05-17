@@ -7,7 +7,7 @@
         <button>Edit</button>
         <button>Add</button>
     </aside>
-    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="6.6" [disableDefaultUI]="false" [zoomControl]="true">
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="6.6" [disableDefaultUI]="false" [zoomControl]="true" [styles]="styles">
         <!-- <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker> -->
         <agm-circle *ngFor="let item of baseStation" [latitude]="item.lat" [longitude]="item.lng" [radius]="item.rad" [fillColor]="'red'">
         </agm-circle>
