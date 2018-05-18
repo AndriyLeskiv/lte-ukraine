@@ -1,19 +1,64 @@
 <h1 class="title">{{ title }}</h1>
 
 <div class="container">
-    <!-- TO_DO create controls component -->
-    <aside>
-        Some contrlos
-        <button>Edit</button>
-        <button>Add</button>
-    </aside>
-    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="6.6" [disableDefaultUI]="false" [zoomControl]="true" [styles]="styles">
-        <!-- <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker> -->
-        <agm-circle *ngFor="let item of baseStation" [latitude]="item.lat" [longitude]="item.lng" [radius]="item.rad" [fillColor]="'red'">
-        </agm-circle>
-    </agm-map>
+  <aside>
+    Some contrlos
+    <button (click)="addBS()">Add BS</button>
+    <p *ngIf="addMode">Edit mode</p>
+  </aside>
+  <agm-map 
+    [latitude]="lat" 
+    [longitude]="lng" 
+    [zoom]="6.6" 
+    [disableDefaultUI]="false" 
+    [zoomControl]="true" 
+    [styles]="styles"
+    (mapClick)="mapClicked($event)">
+
+      <agm-marker 
+        *ngFor="let item of baseStation" 
+        [latitude]="item.lat" 
+        [longitude]="item.lng" 
+        (markerClick)="markerClicked(item.id)">
+
+        <agm-info-window [isOpen]="isInfoWindowOpen(item.id)"
+        [latitude]="item.lat" 
+        [longitude]="item.lng">
+          <div *ngIf="editMode">
+            <label for="lat">lat</label>
+            <input id="lat" type="text"  [(ngModel)]="item.lat">
+            <label for="lng">lng</label>
+            <input id="lng" type="text" [(ngModel)]="item.lng" >
+          </div>
+          <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam animi sunt aut tempora inventore molestiae a quas, soluta et nisi voluptatem rem. Natus cumque saepe excepturi molestias corporis maiores mollitia?
+          </div>
+          <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam animi sunt aut tempora inventore molestiae a quas, soluta et nisi voluptatem rem. Natus cumque saepe excepturi molestias corporis maiores mollitia?
+          </div>
+          <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam animi sunt aut tempora inventore molestiae a quas, soluta et nisi voluptatem rem. Natus cumque saepe excepturi molestias corporis maiores mollitia?
+          </div>
+          <button (click)="editMode = !editMode">
+            <span></span>
+            {{editMode? 'save' :'edit'}}
+          </button>
+          <button (click)="deleteBS(item.id)">delete</button>
+        </agm-info-window>
+
+      </agm-marker>
+
+      <agm-circle 
+        *ngFor="let item of baseStation" 
+        [latitude]="item.lat" 
+        [longitude]="item.lng" 
+        [radius]="item.rad" 
+        [fillColor]="'red'"
+        (circleClick)="markerClicked($event)">
+      </agm-circle>
+  </agm-map>
 </div>
 
 <footer>
-    @Andriy Leskiv, i toi Pizdyk. 2018
+  @Andriy Leskiv, i toi Pizdyk. 2018
 </footer>
