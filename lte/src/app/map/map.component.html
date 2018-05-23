@@ -2,9 +2,11 @@
 
 <div class="container">
   <aside>
-    Some contrlos
-    <button (click)="addBS()">Add BS</button>
-    <p *ngIf="addMode">Edit mode</p>
+    <button class="add-bs" (click)="addBS()">Додати БС</button>
+    <p *ngIf="addMode">Режим додавання базових станцій</p>
+    <hr>
+    <p><b>Кількість базових станцій:</b> <span>{{baseStation.length}}</span></p>
+    <p><b>Загальнв площа:</b><span> {{S}}</span></p>
   </aside>
   <agm-map 
     [latitude]="lat" 
@@ -19,31 +21,44 @@
         *ngFor="let item of baseStation" 
         [latitude]="item.lat" 
         [longitude]="item.lng" 
-        (markerClick)="markerClicked(item.id)">
+        (markerClick)="markerClicked(item.id)"
+        [iconUrl]="'assets/bs.png'">
 
         <agm-info-window [isOpen]="isInfoWindowOpen(item.id)"
         [latitude]="item.lat" 
         [longitude]="item.lng">
-          <div *ngIf="editMode">
-            <label for="lat">lat</label>
-            <input id="lat" type="text"  [(ngModel)]="item.lat">
-            <label for="lng">lng</label>
-            <input id="lng" type="text" [(ngModel)]="item.lng" >
+          <h3>Інформаціпро про БС №{{item.id}}</h3>
+          <table>
+            <tr>
+              <td>Широта</td>
+              <td>
+                <p *ngIf="!editMode">{{item.lat}}</p>
+                <input *ngIf="editMode" type="text"  [(ngModel)]="item.lat">
+              </td>
+            </tr>
+            <tr>
+              <td>Довгота</td>
+              <td>
+                <p *ngIf="!editMode">{{item.lng}}</p>
+                <input *ngIf="editMode"  type="text"  [(ngModel)]="item.lng">
+              </td>
+            </tr>
+            <tr>
+              <td>Радіус дії</td>
+              <td>
+                <p *ngIf="!editMode">{{item.rad/ 1000}} км</p>
+                <input *ngIf="editMode"  type="text"  [(ngModel)]="item.rad">
+              </td>
+              </tr>
+          </table>
+          <div class="controls">
+            <button (click)="editMode = !editMode">
+              <span></span>
+              {{editMode? 'Зберегти' :'Редагувати'}}
+            </button>
+            <button class="delete" (click)="deleteBS(item.id)">видалити</button>
           </div>
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam animi sunt aut tempora inventore molestiae a quas, soluta et nisi voluptatem rem. Natus cumque saepe excepturi molestias corporis maiores mollitia?
-          </div>
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam animi sunt aut tempora inventore molestiae a quas, soluta et nisi voluptatem rem. Natus cumque saepe excepturi molestias corporis maiores mollitia?
-          </div>
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam animi sunt aut tempora inventore molestiae a quas, soluta et nisi voluptatem rem. Natus cumque saepe excepturi molestias corporis maiores mollitia?
-          </div>
-          <button (click)="editMode = !editMode">
-            <span></span>
-            {{editMode? 'save' :'edit'}}
-          </button>
-          <button (click)="deleteBS(item.id)">delete</button>
+          
         </agm-info-window>
 
       </agm-marker>

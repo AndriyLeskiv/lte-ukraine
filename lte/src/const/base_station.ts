@@ -8,7 +8,7 @@ export const BASE_SATION = [
     {
       lat: 48.2,
       lng: 30.5,
-      id:12,
+      id:2,
       rad: 40000
     },
     {
@@ -20,7 +20,7 @@ export const BASE_SATION = [
     {
       lat: 48.5,
       lng: 30.2,
-      id:3,
+      id:4,
       rad: 10000
     }
   ]

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MAP_SETTINGS, BASE_SATION } from '../../const';
+
 @Component({
   selector: 'lte-map',
   templateUrl: './map.component.html',
@@ -13,6 +14,7 @@ export class MapComponent implements OnInit {
   public lat: number = 48.8;
   public lng: number = 30.5;
   public openedWindow : number = 0; 
+  public S = 0;
 
   public addMode: boolean = false;
 
@@ -22,16 +24,17 @@ export class MapComponent implements OnInit {
   public styles = MAP_SETTINGS;
   
   ngOnInit() {
-
+    this.calcAllS();
   }
 
   mapClicked($event) {
     if(this.addMode) {
+      this.addMode = false
       alert('add BS')
       this.baseStation.push({
         lat: $event.coords.lat,
         lng: $event.coords.lng,
-        rad: 10000,
+        rad: 3000,
         id: this.baseStation.length + 2
       });
     }
@@ -53,6 +56,14 @@ export class MapComponent implements OnInit {
     this.baseStation= this.baseStation.filter(item => {
       return item.id !== id;
     })
+  }
+
+  calcAllS (){
+    let sum = 0;
+    this.baseStation.forEach(item => {
+      sum += 3.14 * item.rad/ 1000 * item.rad/ 1000;
+    })
+    this.S = sum;
   }
 
 }
