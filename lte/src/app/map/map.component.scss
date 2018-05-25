@@ -29,10 +29,10 @@ aside {
 
 agm-map {
   width: 100%;
-  height: calc(100vh - 81px);
+  height: calc(100vh - 65px);
 }
 h3{
-  width: 400px;
+  width: 450px;
 }
 
 .controls{
@@ -53,12 +53,13 @@ h3{
 }
 
 footer {
-  background: #dedede;
-  text-align: center;
-  padding: 9px 0;
-  position: fixed;;
-  bottom: 0;
-  width: 100%;
+    background: #dedede;
+    text-align: center;
+    padding: 4px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 12px;
 }
 
 table p{

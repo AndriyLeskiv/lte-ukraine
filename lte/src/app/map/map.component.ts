@@ -30,13 +30,14 @@ export class MapComponent implements OnInit {
   mapClicked($event) {
     if(this.addMode) {
       this.addMode = false
-      alert('add BS')
       this.baseStation.push({
         lat: $event.coords.lat,
         lng: $event.coords.lng,
-        rad: 3000,
+        rad: 0,
         id: this.baseStation.length + 2
       });
+      this.openedWindow = this.baseStation.length + 1;
+      this.editMode = true;
     }
   }
 
@@ -51,11 +52,21 @@ export class MapComponent implements OnInit {
   addBS(){
     this.addMode = !this.addMode
   }
+  saveMarker(item){
+    console.log(item);
+    if (!this.editMode) {
+      this.openedWindow = null;
+    }
+     
+      // this.editMode = true;
+  }
 
   deleteBS(id){
     this.baseStation= this.baseStation.filter(item => {
       return item.id !== id;
     })
+    console.log(this.baseStation);
+    
   }
 
   calcAllS (){

@@ -33,26 +33,54 @@
               <td>Широта</td>
               <td>
                 <p *ngIf="!editMode">{{item.lat}}</p>
-                <input *ngIf="editMode" type="text"  [(ngModel)]="item.lat">
+                <input *ngIf="editMode" type="number"  [(ngModel)]="item.lat">
               </td>
             </tr>
             <tr>
               <td>Довгота</td>
               <td>
                 <p *ngIf="!editMode">{{item.lng}}</p>
-                <input *ngIf="editMode"  type="text"  [(ngModel)]="item.lng">
+                <input *ngIf="editMode"  type="number"  [(ngModel)]="item.lng">
               </td>
             </tr>
             <tr>
               <td>Радіус дії</td>
               <td>
                 <p *ngIf="!editMode">{{item.rad/ 1000}} км</p>
-                <input *ngIf="editMode"  type="text"  [(ngModel)]="item.rad">
+                <input *ngIf="editMode"  type="number"  [(ngModel)]="item.rad">
               </td>
-              </tr>
+            </tr>
+            <tr>
+              <td>Висота пе-редаваль-ної антени  </td>
+              <td>
+                <p *ngIf="!editMode">{{item.rad/ 1000}} </p>
+                <input *ngIf="editMode"  type="number"  [(ngModel)]="item.rad">
+              </td>
+            </tr>
+            <tr>
+              <td>Загасання фідера:</td>
+              <td>
+                <p *ngIf="!editMode">{{item.rad/ 1000}} </p>
+                <input *ngIf="editMode"  type="number"  [(ngModel)]="item.rad">
+              </td>
+            </tr>
+            <tr>
+              <td>Напруженість поля:</td>
+              <td>
+                <p *ngIf="!editMode">{{item.rad/ 1000}} </p>
+                <input *ngIf="editMode"  type="number"  [(ngModel)]="item.rad">
+              </td>
+            </tr>
+            <tr>
+              <td>Кількість обслуговуючих пристроїв в ансамблі:</td>
+              <td>
+                <p *ngIf="!editMode">{{item.rad/ 1000}} </p>
+                <input *ngIf="editMode"  type="number"  [(ngModel)]="item.rad">
+              </td>
+            </tr>
           </table>
           <div class="controls">
-            <button (click)="editMode = !editMode">
+            <button (click)="editMode = !editMode; saveMarker(item)">
               <span></span>
               {{editMode? 'Зберегти' :'Редагувати'}}
             </button>
@@ -75,5 +103,5 @@
 </div>
 
 <footer>
-  @Andriy Leskiv, i toi Pizdyk. 2018
+  @Andriy Leskiv. 2018
 </footer>
