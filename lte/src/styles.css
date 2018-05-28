@@ -35,7 +35,7 @@ button:hover{
   border-color: #0062cc;
 }
 
-input {
+input[type="number"] {
   display: block;
   width: 100%;
   padding: .375rem .75rem;

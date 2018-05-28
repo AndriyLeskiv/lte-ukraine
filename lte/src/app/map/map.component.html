@@ -51,49 +51,39 @@
               </td>
             </tr>
             <tr>
-              <td>Висота пе-редаваль-ної антени  </td>
+              <td>Висота передавальної антени  </td>
               <td>
                 <p *ngIf="!editMode">{{item.rad/ 1000}} </p>
                 <input *ngIf="editMode"  type="number"  [(ngModel)]="item.rad">
               </td>
             </tr>
             <tr>
-              <td>Загасання фідера:</td>
-              <td>
-                <p *ngIf="!editMode">{{item.rad/ 1000}} </p>
-                <input *ngIf="editMode"  type="number"  [(ngModel)]="item.rad">
-              </td>
-            </tr>
-            <tr>
-              <td>Напруженість поля:</td>
-              <td>
-                <p *ngIf="!editMode">{{item.rad/ 1000}} </p>
-                <input *ngIf="editMode"  type="number"  [(ngModel)]="item.rad">
-              </td>
-            </tr>
-            <tr>
-              <td>Кількість обслуговуючих пристроїв в ансамблі:</td>
+              <td>Максимальна кількість обслуговуючих пристроїв:</td>
               <td>
                 <p *ngIf="!editMode">{{item.rad/ 1000}} </p>
                 <input *ngIf="editMode"  type="number"  [(ngModel)]="item.rad">
               </td>
             </tr>
           </table>
-          <div class="row">
+          <!--<label for="real">Real time</label>-->
+          <!--<input id="real" type="checkbox" [(ngModel)]="realTime" (click)="realTimeGen(realTime)">-->
+          <div class="row"  *ngIf="!hideMode">
+            
             <div class="col-md-6">
               <div style="display: block;">
-              <canvas baseChart width="400" height="400"
-                          [datasets]="lineChartData"
-                          [labels]="lineChartLabels"
-                          [options]="lineChartOptions"
-                          [colors]="lineChartColors"
-                          [legend]="lineChartLegend"
-                          [chartType]="lineChartType"
-                          (chartHover)="chartHovered($event)"
-                          (chartClick)="chartClicked($event)"></canvas>
+                <canvas 
+                  baseChart 
+                  height="318px"
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [colors]="lineChartColors"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType">
+                </canvas>
               </div>
             </div>
-            <div class="col-md-6" style="margin-bottom: 10px">
+            <!--<div class="col-md-6" style="margin-bottom: 10px">
               <table class="table table-responsive table-condensed">
                 <tr>
                   <th *ngFor="let label of lineChartLabels">{{label}}</th>
@@ -103,7 +93,7 @@
                 </tr>
               </table>
               <button (click)="randomize()">CLICK</button>
-            </div>
+            </div>-->
           </div>
           <div class="controls">
             <button (click)="editMode = !editMode; saveMarker(item)">

@@ -27,6 +27,11 @@ aside {
   width: 100%;
 }
 
+canvas{
+  height: 318px !important;
+width: 450px !important;
+}
+
 agm-map {
   width: 100%;
   height: calc(100vh - 65px);
@@ -67,7 +72,7 @@ table p{
   margin: 6px
 }
 table td:first-child {
-  width: 150px;
+  width: 350px;
   text-transform: uppercase;
   color: #7d7d7d;
 }
