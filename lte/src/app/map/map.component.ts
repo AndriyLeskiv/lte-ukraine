@@ -11,9 +11,9 @@ export class MapComponent implements OnInit {
   constructor() { }
 
   public title: string = 'Розташування Базових станцій 4G';
-  public lat: number = 48.8;
-  public lng: number = 30.5;
-  public openedWindow : number = 0; 
+  public lat: number = 49.84050;
+  public lng: number = 24.015694;
+  public openedWindow : number = 0;
   public S = 0;
 
   public addMode: boolean = false;
@@ -22,7 +22,7 @@ export class MapComponent implements OnInit {
 
   public baseStation = BASE_SATION;
   public styles = MAP_SETTINGS;
-  
+
   ngOnInit() {
     this.calcAllS();
   }
@@ -63,7 +63,7 @@ export class MapComponent implements OnInit {
   ];
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
- 
+
   public randomize():void {
     let _lineChartData:Array<any> = new Array(this.lineChartData.length);
     for (let i = 0; i < this.lineChartData.length; i++) {
@@ -74,12 +74,12 @@ export class MapComponent implements OnInit {
     }
     this.lineChartData = _lineChartData;
   }
- 
+
   // events
   public chartClicked(e:any):void {
     console.log(e);
   }
- 
+
   public chartHovered(e:any):void {
     console.log(e);
   }
@@ -117,7 +117,7 @@ export class MapComponent implements OnInit {
     if (!this.editMode) {
       this.openedWindow = null;
     }
-     
+
       // this.editMode = true;
   }
 
@@ -126,7 +126,7 @@ export class MapComponent implements OnInit {
       return item.id !== id;
     })
     console.log(this.baseStation);
-    
+
   }
 
   calcAllS (){
