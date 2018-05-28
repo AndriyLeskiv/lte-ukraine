@@ -56,12 +56,12 @@ export class MapComponent implements OnInit {
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
 
-  public randomize():void {
+  public randomize(item):void {
     let _lineChartData:Array<any> = new Array(this.lineChartData.length);
     for (let i = 0; i < this.lineChartData.length; i++) {
       _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
       for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = this.randomNum(_lineChartData[i].data[j-1], 3000, 450);
+        _lineChartData[i].data[j] = this.randomNum(_lineChartData[i].data[j-1], item.rad, item.maxAbonents);
       }
     }
     this.lineChartData = _lineChartData;
@@ -113,14 +113,14 @@ export class MapComponent implements OnInit {
     return this.openedWindow == id;
   }
 
-  markerClicked(id) {
-    this.openedWindow = id;
-    this.randomize();
+  markerClicked(item) {
+    this.openedWindow = item.id;
+    this.randomize(item);
   }
 
   realTimeGen(value){
     if(!value){
-      this.interval = setInterval(this.randomize(), 5000);
+      // this.interval = setInterval(this.randomize(), 5000);
     } else {
       clearInterval(this.interval);
     }

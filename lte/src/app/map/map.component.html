@@ -21,7 +21,7 @@
         *ngFor="let item of baseStation"
         [latitude]="item.lat"
         [longitude]="item.lng"
-        (markerClick)="markerClicked(item.id)"
+        (markerClick)="markerClicked(item)"
         [iconUrl]="'assets/bs.png'">
 
         <agm-info-window [isOpen]="isInfoWindowOpen(item.id)"
@@ -53,22 +53,22 @@
             <tr>
               <td>Висота передавальної антени  </td>
               <td>
-                <p *ngIf="!editMode">{{item.rad/ 1000}} </p>
-                <input *ngIf="editMode"  type="number"  [(ngModel)]="item.rad">
+                <p *ngIf="!editMode">{{item.federHeight}} м </p>
+                <input *ngIf="editMode"  type="number"  [(ngModel)]="item.federHeight">
               </td>
             </tr>
             <tr>
               <td>Максимальна кількість обслуговуючих пристроїв:</td>
               <td>
-                <p *ngIf="!editMode">{{item.rad/ 1000}} </p>
-                <input *ngIf="editMode"  type="number"  [(ngModel)]="item.rad">
+                <p *ngIf="!editMode">{{item.maxAbonents}} </p>
+                <input *ngIf="editMode"  type="number"  [(ngModel)]="item.maxAbonents">
               </td>
             </tr>
           </table>
           <!--<label for="real">Real time</label>-->
           <!--<input id="real" type="checkbox" [(ngModel)]="realTime" (click)="realTimeGen(realTime)">-->
           <div class="row"  *ngIf="!hideMode">
-            
+            <h3>Навантаженість базової станції</h3>
             <div class="col-md-6">
               <div style="display: block;">
                 <canvas 
