@@ -15,7 +15,7 @@ export class MapComponent implements OnInit {
   public lat: number = 49.84050;
   public lng: number = 24.015694;
   public openedWindow : number = 0;
-  public S = 0;
+  public S;
   public addMode: boolean = false;
   public editMode: boolean = false;
   public baseStation = BASE_SATION;
@@ -56,7 +56,7 @@ export class MapComponent implements OnInit {
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
 
-  public randomize(item):void {
+  public randomize(item) {
     let _lineChartData:Array<any> = new Array(this.lineChartData.length);
     for (let i = 0; i < this.lineChartData.length; i++) {
       _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
@@ -65,6 +65,7 @@ export class MapComponent implements OnInit {
       }
     }
     this.lineChartData = _lineChartData;
+    return _lineChartData;
   }
 
   randomNum(prev, rad, max){
@@ -97,10 +98,10 @@ export class MapComponent implements OnInit {
       this.baseStation.push({
         lat: $event.coords.lat,
         lng: $event.coords.lng,
-        rad: 0,
-        id: this.baseStation.length + 2,
+        rad: this.genRandomRad(),
+        id: this.baseStation[this.baseStation.length-1].id + 2,
         federHeight: 0,
-        maxAbonents: 0,
+        maxAbonents: 750,
         curentAbonents: 0
       });
       this.openedWindow = this.baseStation.length + 1;
@@ -109,13 +110,22 @@ export class MapComponent implements OnInit {
     }
   }
 
+  genRandomRad() {
+    return 900;
+  }
+
   isInfoWindowOpen(id) {
     return this.openedWindow == id;
   }
 
   markerClicked(item) {
     this.openedWindow = item.id;
-    this.randomize(item);
+    if(!item.chart) {
+      let a = this.randomize(item);
+      item.chart = a;
+    } else {
+      this.lineChartData = item.chart;
+    }
   }
 
   realTimeGen(value){
@@ -133,6 +143,7 @@ export class MapComponent implements OnInit {
     if (!this.editMode) {
       this.openedWindow = null;
       this.hideMode = false;
+      this.calcAllS ();
     }
   }
 
@@ -140,6 +151,7 @@ export class MapComponent implements OnInit {
     this.baseStation= this.baseStation.filter(item => {
       return item.id !== id;
     })
+    this.calcAllS ();
   }
 
   calcAllS (){
@@ -147,6 +159,6 @@ export class MapComponent implements OnInit {
     this.baseStation.forEach(item => {
       sum += 3.14 * item.rad/ 1000 * item.rad/ 1000;
     })
-    this.S = sum;
+    this.S = sum.toFixed(2);
   }
 }

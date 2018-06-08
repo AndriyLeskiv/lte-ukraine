@@ -2,10 +2,11 @@
   text-align: center;
   text-transform: uppercase;
   background: #007bff;
-    margin: 0px;
-    padding: 4px;
-    color: white;
+  margin: 0px;
+  padding: 4px;
+  color: white;
 }
+
 .container {
   display: flex;
 }
@@ -14,40 +15,41 @@ aside {
   width: 20%;
   min-width: 200px;
   padding: 10px;
-  p b{
+  p b {
     text-transform: uppercase;
   }
-  span{
+  span {
     font-size: 19px;
     color: #7d7d7d;
   }
 }
 
-.add-bs{
+.add-bs {
   width: 100%;
 }
 
-canvas{
+canvas {
   height: 318px !important;
-width: 450px !important;
+  width: 450px !important;
 }
 
 agm-map {
   width: 100%;
   height: calc(100vh - 65px);
 }
-h3{
-  width: 650px;
+
+h3 {
+  width: 640px;
 }
 
-.controls{
+.controls {
   margin-top: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.delete{
+.delete {
   background: none;
   border: none;
   color: #7d7d7d;
@@ -58,19 +60,20 @@ h3{
 }
 
 footer {
-    background: #dedede;
-    text-align: center;
-    padding: 4px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    font-size: 12px;
+  background: #dedede;
+  text-align: center;
+  padding: 4px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 12px;
 }
 
-table p{
+table p {
   padding: 0;
   margin: 6px
 }
+
 table td:first-child {
   width: 350px;
   text-transform: uppercase;
