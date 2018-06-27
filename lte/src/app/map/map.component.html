@@ -1,19 +1,123 @@
 <h1 class="title">{{ title }}</h1>
 
 <div class="container">
-    <!-- TO_DO create controls component -->
-    <aside>
-        Some contrlos
-        <button>Edit</button>
-        <button>Add</button>
-    </aside>
-    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="6.6" [disableDefaultUI]="false" [zoomControl]="true">
-        <!-- <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker> -->
-        <agm-circle *ngFor="let item of baseStation" [latitude]="item.lat" [longitude]="item.lng" [radius]="item.rad" [fillColor]="'red'">
-        </agm-circle>
-    </agm-map>
+  <aside>
+    <button class="add-bs" (click)="addBS()">Додати БС</button>
+    <p *ngIf="addMode">Режим додавання базових станцій</p>
+    <hr>
+    <p><b>Кількість базових станцій:</b> <span>{{baseStation.length}}</span></p>
+    <p><b>Загальнв площа:</b><span> {{S}}</span></p>
+  </aside>
+  <agm-map
+    [latitude]="lat"
+    [longitude]="lng"
+    [zoom]="12"
+    [disableDefaultUI]="false"
+    [zoomControl]="true"
+    [styles]="styles"
+    (mapClick)="mapClicked($event)">
+
+      <agm-marker
+        *ngFor="let item of baseStation"
+        [latitude]="item.lat"
+        [longitude]="item.lng"
+        (markerClick)="markerClicked(item)"
+        [iconUrl]="'assets/bs.png'">
+
+        <agm-info-window [isOpen]="isInfoWindowOpen(item.id)"
+        [latitude]="item.lat"
+        [longitude]="item.lng">
+          <h3>Інформаціпро про БС №{{item.id}}</h3>
+          <table>
+            <tr>
+              <td>Широта</td>
+              <td>
+                <p *ngIf="!editMode">{{item.lat}}</p>
+                <input *ngIf="editMode" type="number"  [(ngModel)]="item.lat">
+              </td>
+            </tr>
+            <tr>
+              <td>Довгота</td>
+              <td>
+                <p *ngIf="!editMode">{{item.lng}}</p>
+                <input *ngIf="editMode"  type="number"  [(ngModel)]="item.lng">
+              </td>
+            </tr>
+            <tr>
+              <td>Радіус дії</td>
+              <td>
+                <p *ngIf="!editMode">{{item.rad/ 1000}} км</p>
+                <input *ngIf="editMode"  type="number"  [(ngModel)]="item.rad">
+              </td>
+            </tr>
+            <tr>
+              <td>Висота передавальної антени  </td>
+              <td>
+                <p *ngIf="!editMode">{{item.federHeight}} м </p>
+                <input *ngIf="editMode"  type="number"  [(ngModel)]="item.federHeight">
+              </td>
+            </tr>
+            <tr>
+              <td>Максимальна кількість обслуговуючих пристроїв:</td>
+              <td>
+                <p *ngIf="!editMode">{{item.maxAbonents}} </p>
+                <input *ngIf="editMode"  type="number"  [(ngModel)]="item.maxAbonents">
+              </td>
+            </tr>
+          </table>
+          <!--<label for="real">Real time</label>-->
+          <!--<input id="real" type="checkbox" [(ngModel)]="realTime" (click)="realTimeGen(realTime)">-->
+          <div class="row"  *ngIf="!hideMode">
+            <h3>Навантаженість базової станції</h3>
+            <div class="col-md-6">
+              <div style="display: block;">
+                <canvas 
+                  baseChart 
+                  height="318px"
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [colors]="lineChartColors"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType">
+                </canvas>
+              </div>
+            </div>
+            <!--<div class="col-md-6" style="margin-bottom: 10px">
+              <table class="table table-responsive table-condensed">
+                <tr>
+                  <th *ngFor="let label of lineChartLabels">{{label}}</th>
+                </tr>
+                <tr *ngFor="let d of lineChartData">
+                  <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+                </tr>
+              </table>
+              <button (click)="randomize()">CLICK</button>
+            </div>-->
+          </div>
+          <div class="controls">
+            <button (click)="editMode = !editMode; saveMarker(item)">
+              <span></span>
+              {{editMode? 'Зберегти' :'Редагувати'}}
+            </button>
+            <button class="delete" (click)="deleteBS(item.id)">видалити</button>
+          </div>
+
+        </agm-info-window>
+
+      </agm-marker>
+
+      <agm-circle
+        *ngFor="let item of baseStation"
+        [latitude]="item.lat"
+        [longitude]="item.lng"
+        [radius]="item.rad"
+        [fillColor]="'red'"
+        (circleClick)="markerClicked($event)">
+      </agm-circle>
+  </agm-map>
 </div>
 
 <footer>
-    @Andriy Leskiv, i toi Pizdyk. 2018
+  @Andriy Leskiv. 2018
 </footer>
